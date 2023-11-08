@@ -8,3 +8,6 @@ export interface ValidateUser {
   firstname: string;
   password: string;
 }
+export interface DeleteUser {
+  id: string;
+}

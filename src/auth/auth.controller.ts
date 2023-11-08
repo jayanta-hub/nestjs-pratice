@@ -1,7 +1,8 @@
 import {
   Body,
   Controller,
-  Get,
+  HttpCode,
+  HttpStatus,
   Post,
   UsePipes,
   ValidationPipe,
@@ -13,17 +14,14 @@ import { CreateUser, ValidateUser } from './dto/auth-interface';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @HttpCode(HttpStatus.OK)
   @Post('/signin')
   @UsePipes(new ValidationPipe())
   signIn(@Body() userInfoDto: ValidateUser) {
     return this.authService.signIn(userInfoDto);
   }
   @Post('/signup')
-  signUp(@Body() authCredentialsDto: CreateUser): Promise<void> {
+  signUp(@Body() authCredentialsDto: CreateUser) {
     return this.authService.signUp(authCredentialsDto);
-  }
-  @Get()
-  getAll() {
-    return this.authService.getAll();
   }
 }
