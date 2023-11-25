@@ -9,7 +9,14 @@ import { UserService } from './user/user.service';
 import { UserController } from './user/user.controller';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, DatabaseModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env'],
+    }),
+    AuthModule,
+    DatabaseModule,
+  ],
   controllers: [AppController, UserController],
   providers: [AppService, AuthService, UserService],
 })

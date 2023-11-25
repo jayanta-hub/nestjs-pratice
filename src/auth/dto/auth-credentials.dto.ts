@@ -1,8 +1,8 @@
 import { IsString, Matches, MaxLength, MinLength } from 'class-validator';
-import { Model, Table } from 'sequelize-typescript';
+// import { Model, Table } from 'sequelize-typescript';
 
-@Table({ tableName: 'user', timestamps: true })
-export class AuthSinginDto extends Model {
+// @Table({ tableName: 'user', timestamps: true })
+export class SingupDto {
   @IsString()
   @MinLength(4)
   @MaxLength(20)
@@ -25,12 +25,21 @@ export class AuthSinginDto extends Model {
     message: 'password is too weak',
   })
   password: string;
-}
-export class AuthCredentialsDto {
+
+  @IsString()
+  title: string;
+
   @IsString()
   @MinLength(4)
-  @MaxLength(20)
-  username: string;
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+    message:
+      'userId should contain lower case, upper case, numbers and special Character.',
+  })
+  userId: string;
+}
+export class SigninDto {
+  @IsString()
+  userId: string;
 
   @IsString()
   @MinLength(8)

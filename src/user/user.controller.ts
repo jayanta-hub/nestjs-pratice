@@ -12,8 +12,8 @@ export class UserController {
   getAll() {
     return this.userService.getAll();
   }
-  //   @UseGuards(AuthGuard)
-  @Delete('/:id')
+  @UseGuards(AuthGuard)
+  @Delete('delete/:id')
   delete(@Param() id: DeleteUser) {
     return this.userService.deleteById(id);
   }

@@ -1,11 +1,14 @@
 export interface CreateUser {
-  firstname: string;
-  lastname: string;
+  title: string;
+  firstName: string;
+  lastName: string;
   gender: string;
   password: string;
+  email: string;
+  userId: string;
 }
 export interface ValidateUser {
-  firstname: string;
+  userId: string;
   password: string;
 }
 export interface DeleteUser {

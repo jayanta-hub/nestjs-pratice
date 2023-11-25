@@ -33,7 +33,13 @@ export class Database {
         dialect: 'postgres',
         port: 5432,
       });
-      this.logger.debug('Database connection successful.');
+
+      this.db
+        .authenticate()
+        .then(() => this.logger.debug('Database connection successful.'))
+        .catch((e) => {
+          console.log('error', e);
+        });
     } catch (error) {
       console.error('Unable to connect to the database:', error);
       this.logger.debug('Database connection fail.');
