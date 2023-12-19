@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
-import { User } from './user.entity';
+import { Users } from './users.entity';
 import { randomUUID } from 'crypto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -10,13 +10,22 @@ export class AuthService {
 
   async signUp(userInfoDto: any) {
     try {
-      const saltOrRounds = 10;
-      const hash = await bcrypt.hash(userInfoDto.password, saltOrRounds);
-      userInfoDto['id'] = randomUUID();
-      userInfoDto['password'] = hash;
-      const result = await User.create(userInfoDto, { returning: false });
-      // To Do  return successful message
-      return result;
+      const ExsitingUser = await Users.findOne({
+        where: { userId: userInfoDto.userId },
+      });
+      if (!ExsitingUser) {
+        const saltOrRounds = 10;
+        const hash = await bcrypt.hash(userInfoDto.password, saltOrRounds);
+        userInfoDto['id'] = randomUUID();
+        userInfoDto['password'] = hash;
+        const result = await Users.create(userInfoDto, { returning: false });
+        // To Do  return successful message
+        return result;
+      } else {
+        return new UnauthorizedException(
+          'userId is existing. Please try with another userId.',
+        );
+      }
     } catch (e) {
       this.logger.error(e);
       return e;
@@ -24,13 +33,9 @@ export class AuthService {
     // return authCredentialsDto;
   }
   async signIn(userInfoDto: any) {
-    console.log(
-      '🚀 ~ file: auth.service.ts:27 ~ AuthService ~ signIn ~ userInfoDto:',
-      userInfoDto,
-    );
     if (!userInfoDto) throw new UnauthorizedException('EMPTY');
     try {
-      const user = await User.findOne({
+      const user = await Users.findOne({
         where: { userId: userInfoDto.userId },
       });
       // Compare the hash password
@@ -47,11 +52,10 @@ export class AuthService {
         message: 'Login successful',
       };
     } catch (error) {
-      console.log(
-        '🚀 ~ file: auth.service.ts:49 ~ AuthService ~ signIn ~ error:',
-        error,
-      );
       throw new UnauthorizedException('Invalid credentials');
     }
+  }
+  async userProfile(userProfileDto: any) {
+    console.log('first', userProfileDto);
   }
 }

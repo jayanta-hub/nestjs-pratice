@@ -25,4 +25,9 @@ export class AuthController {
   signUp(@Body() authCredentialsDto: SingupDto) {
     return this.authService.signUp(authCredentialsDto);
   }
+  @Post('/user/profile')
+  @UsePipes(new ValidationPipe())
+  userProfile(@Body() userProfileDto: any) {
+    return this.authService.userProfile(userProfileDto);
+  }
 }

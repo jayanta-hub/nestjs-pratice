@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
-import { User } from 'src/auth/user.entity';
+import { Users } from 'src/auth/users.entity';
+import { UsersAddress } from 'src/auth/usersaddress.entity';
 
 export const databaseProviders = [
   {
@@ -9,7 +10,7 @@ export const databaseProviders = [
       const sequelize = await new Database().init();
 
       // * Add models
-      sequelize.addModels([User]);
+      sequelize.addModels([Users, UsersAddress]);
       await sequelize.sync(); //{ force: true, alter: true }
 
       return sequelize;

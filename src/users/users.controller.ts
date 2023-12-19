@@ -1,7 +1,7 @@
 import { Controller, Delete, Get, Param, UseGuards } from '@nestjs/common';
 import { DeleteUser } from 'src/auth/dto/auth-interface';
-import { UserService } from './user.service';
-import { AuthGuard } from './auth.guard';
+import { UserService } from './users.service';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Controller('user')
 export class UserController {

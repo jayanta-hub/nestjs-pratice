@@ -2,7 +2,7 @@ export interface CreateUser {
   title: string;
   firstName: string;
   lastName: string;
-  gender: string;
+  phoneNumber: string;
   password: string;
   email: string;
   userId: string;

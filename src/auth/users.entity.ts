@@ -1,7 +1,7 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table({ tableName: 'auth', timestamps: true })
-export class User extends Model {
+@Table({ tableName: 'users', timestamps: true })
+export class Users extends Model {
   @Column({
     primaryKey: true,
     type: DataType.STRING,
@@ -15,7 +15,7 @@ export class User extends Model {
   lastname: string;
 
   @Column({ type: DataType.STRING })
-  gender: string;
+  title: string;
 
   @Column({ type: DataType.STRING })
   password: string;
@@ -25,6 +25,12 @@ export class User extends Model {
 
   @Column({ type: DataType.STRING })
   userId: string;
+
+  @Column({ type: DataType.STRING })
+  phonenumber: string;
+
+  @Column({ type: DataType.STRING })
+  profilepic: string;
 
   // @Column({ type: DataType.STRING })
   // token: string;

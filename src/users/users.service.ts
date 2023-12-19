@@ -1,18 +1,27 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Op } from 'sequelize';
 import { DeleteUser } from 'src/auth/dto/auth-interface';
-import { User } from 'src/auth/user.entity';
+import { Users } from 'src/auth/users.entity';
+import { QueryService } from 'src/query/query.service';
 
 @Injectable()
 export class UserService {
+  constructor(private query: QueryService) {
+    //
+  }
   async getAll() {
-    let result = await User.findAll();
+    const users = await this.query.dbQuery();
+    console.log(
+      '🚀 ~ file: users.service.ts:15 ~ UserService ~ getAll ~ users:',
+      users,
+    );
+    const result = await Users.findAll();
     return result;
   }
 
   async deleteById(id: DeleteUser) {
     try {
-      await User.destroy({
+      await Users.destroy({
         where: {
           id: {
             [Op.eq]: id.id,
