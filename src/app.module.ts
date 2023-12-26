@@ -8,6 +8,7 @@ import { DatabaseModule } from './database/database.module';
 import { UserService } from './users/users.service';
 import { UserController } from './users/users.controller';
 import { QueryService } from './query/query.service';
+import { QueryModule } from './query/query.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { QueryService } from './query/query.service';
     }),
     AuthModule,
     DatabaseModule,
+    QueryModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService, AuthService, UserService, QueryService],

@@ -4,11 +4,13 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SigninDto, SingupDto } from './dto/auth-credentials.dto';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -25,6 +27,7 @@ export class AuthController {
   signUp(@Body() authCredentialsDto: SingupDto) {
     return this.authService.signUp(authCredentialsDto);
   }
+  @UseGuards(AuthGuard)
   @Post('/user/profile')
   @UsePipes(new ValidationPipe())
   userProfile(@Body() userProfileDto: any) {

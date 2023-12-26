@@ -6,7 +6,6 @@ export class SingupDto {
     example: 'Jayanta',
   })
   @IsString()
-  @MinLength(4)
   @MaxLength(20)
   firstname: string;
 
@@ -15,7 +14,6 @@ export class SingupDto {
     example: 'Garu',
   })
   @IsString()
-  @MinLength(4)
   @MaxLength(20)
   lastname: string;
 
@@ -57,7 +55,7 @@ export class SingupDto {
     message:
       'userId should contain lower case, upper case, numbers and special Character.',
   })
-  userId: string;
+  userid: string;
 }
 export class SigninDto {
   @ApiProperty({
@@ -65,7 +63,7 @@ export class SigninDto {
     example: 'Jayanta123',
   })
   @IsString()
-  userId: string;
+  userid: string;
 
   @ApiProperty({
     description: 'The password of the User',

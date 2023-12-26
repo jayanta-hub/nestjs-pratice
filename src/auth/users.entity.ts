@@ -24,7 +24,7 @@ export class Users extends Model {
   email: string;
 
   @Column({ type: DataType.STRING })
-  userId: string;
+  userid: string;
 
   @Column({ type: DataType.STRING })
   phonenumber: string;

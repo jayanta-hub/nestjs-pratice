@@ -6,8 +6,7 @@ import { AuthGuard } from '../guards/auth.guard';
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
-
-  //   @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   @Get()
   getAll() {
     return this.userService.getAll();
